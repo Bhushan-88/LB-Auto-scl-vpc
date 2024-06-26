@@ -7,10 +7,11 @@ terraform {
 }
 
 provider "aws" {
-    region = us-east-1
+    region = "us-east-1"
+}
 
-module "my_vpc" {
-    source = "./modules/vpc"
+module "vpc_module" {
+    source = "modules/vpc"
     project = "cloudblitz"
     vpc_cidr = "10.10.0.0/16"
     pri_sub_cidr = "10.10.0.0/20"
