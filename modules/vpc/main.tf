@@ -6,9 +6,9 @@ resource "aws" "my_vpc" {
     }
 }
 
-resource "aws_subnet" "pri_subnet" {
+resource "aws_subnet" "private_subnet" {
     vpc_id = aws_vpc.my_vpc.id
-    cidr_block = var.pri_sub_cidr
+    cidr_block = var.private_sub_cidr
 
     tags = {
         Name = "${var.project}-private-subnet"
@@ -16,9 +16,9 @@ resource "aws_subnet" "pri_subnet" {
     }  
 }
 
-resource "aws_subnet" "pub_subnet" {
-    vpc_id = aws_subnet.pub_subnet
-    cidr_block = var.pub_sub_cidr
+resource "aws_subnet" "public_subnet" {
+    vpc_id = aws_subnet.pub_subnet.id
+    cidr_block = var.public_sub_cidr
 
     tags = {
         Name = "${var.project}-public-subnet"
@@ -38,7 +38,7 @@ resource "aws_internet_gateway" "my_igw" {
   
 }
 
-resource "aws_default_route_table" "example" {
+resource "aws_default_route_table" "my_vpc_default" {
   default_route_table_id = aws_vpc.my_vpc.default_route_table_id
 
   route {
